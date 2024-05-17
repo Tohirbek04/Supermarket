@@ -9,14 +9,10 @@ class Products(View):
 
     def get(self, *args, **kwargs):
         products = Product.objects.all()
-        fruit = Categories.objects.get(slug='fruit')
-        fruits = Product.objects.filter(category=fruit)
-        vegetable = Categories.objects.get(slug='vegetable')
-        vegetables = Product.objects.filter(category=vegetable.id)
-        bread = Categories.objects.get(slug='bread')
-        breads = Product.objects.filter(category=bread.id)
-        meat = Categories.objects.get(slug='meat')
-        meats = Product.objects.filter(category=meat.id)
+        fruits = Product.objects.filter(category__slug='fruit')
+        vegetables = Product.objects.filter(category__slug='vegetable')
+        breads = Product.objects.filter(category__slug='bread')
+        meats = Product.objects.filter(category__slug='meat')
 
         context = {
             "products": products,
