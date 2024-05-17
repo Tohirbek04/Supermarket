@@ -1,0 +1,30 @@
+version: '3'
+services:
+
+  backend_service:
+    build:
+      context: .
+      dockerfile: service/Dockerfile
+    command: /backend-run
+    ports:
+      - 8080:${PROJECT_PORT}
+    volumes:
+      - static_volume:/app/static
+      - media_volume:/app/media
+
+  db_service:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - supermarket:/var/lib/postgresql/data
+
+
+volumes:
+  static_volume:
+  media_volume:
+  supermarket:
+
+
+
